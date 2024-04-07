@@ -9,7 +9,6 @@ export function isValidSudoku(board: string[][]): boolean {
         continue;
       }
       const currentBox = `${Math.floor(i / 3)}-${Math.floor(j / 3)}`;
-      console.log('TCL: currentBox', currentBox);
 
       if (
         set.has(`row${i}-${board[i][j]}`) ||
