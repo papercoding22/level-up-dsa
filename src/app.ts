@@ -2,7 +2,8 @@ import { select, Separator } from '@inquirer/prompts';
 import chalk from 'chalk';
 
 import { isValidSudoku } from './algorithms/valid-sudoku-hash-map';
-import UndirectedGraph from './data-structures/graph/UndirectedGraphAdjacencyMatrix';
+import UndirectedGraphMatrix from './data-structures/graph/UndirectedGraphAdjacencyMatrix';
+import UndirectedGraphList from './data-structures/graph/UndirectedGraphAdjacencyList';
 
 const log = console.log;
 
@@ -12,6 +13,10 @@ async function main() {
     {
       name: 'Display Undirected Graph Adjacency Matrix',
       value: 'displayUndirectedGraphAdjacencyMatrix',
+    },
+    {
+      name: 'Display Undirected Graph Adjacency List',
+      value: 'displayUndirectedGraphAdjacencyList',
     },
     {
       name: 'Valid Sudoku',
@@ -29,12 +34,22 @@ async function main() {
   switch (answer) {
     case 'displayUndirectedGraphAdjacencyMatrix':
       log(chalk.green('Display Undirect Graph Adjacency Matrix...'));
-      const graph = new UndirectedGraph(5);
-      graph.addEdge(0, 1);
-      graph.addEdge(1, 2);
-      graph.addEdge(2, 3);
-      graph.addEdge(3, 4);
-      graph.displayGraph();
+      const graphMatrix = new UndirectedGraphMatrix(5);
+      graphMatrix.addEdge(0, 1);
+      graphMatrix.addEdge(1, 2);
+      graphMatrix.addEdge(2, 3);
+      graphMatrix.addEdge(3, 4);
+      graphMatrix.displayGraph();
+      break;
+    case 'displayUndirectedGraphAdjacencyList':
+      log(chalk.green('Display Undirect Graph Adjacency List...'));
+      const graphList = new UndirectedGraphList(5);
+      graphList.addEdge(0, 1);
+      graphList.addEdge(0, 3);
+      graphList.addEdge(1, 2);
+      graphList.addEdge(2, 3);
+      graphList.addEdge(3, 4);
+      graphList.displayGraph();
       break;
     case 'validSudoku':
       log(chalk.green('Running isValidSudoku function...'));
