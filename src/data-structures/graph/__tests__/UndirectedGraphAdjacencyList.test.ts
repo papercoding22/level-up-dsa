@@ -1,36 +1,38 @@
-import UndirectedGraphList from '../UndirectedGraphAdjacencyList';
+import UndirectedGraph from '../UndirectedGraphAdjacencyList';
 
-// Create unit test for UndirectedGraphList class
-
-describe('UndirectedGraphList', () => {
-  let graph: UndirectedGraphList;
+describe('UndirectedGraph', () => {
+  let graph: UndirectedGraph;
 
   beforeEach(() => {
-    graph = new UndirectedGraphList(5);
+    graph = new UndirectedGraph();
   });
 
-  it('should add edges correctly', () => {
-    graph.addEdge(0, 1);
-    graph.addEdge(0, 3);
-    graph.addEdge(1, 2);
-    graph.addEdge(2, 3);
-    graph.addEdge(3, 4);
-
-    expect(graph.getAdjacencyList()).toEqual([[1, 3], [0, 2], [1, 3], [0, 2, 4], [3]]);
+  test('addNode', () => {
+    graph.addNode('A');
+    expect(graph.getAdjacencyList().has('A')).toBe(true);
   });
 
-  it('should remove edges correctly', () => {
-    graph.addEdge(0, 1);
-    graph.addEdge(0, 3);
-    graph.addEdge(1, 2);
-    graph.addEdge(2, 3);
-    graph.addEdge(3, 4);
+  test('addEdge', () => {
+    graph.addNode('A');
+    graph.addNode('B');
+    graph.addEdge('A', 'B');
+    expect(graph.hasEdge('A', 'B')).toBe(true);
+  });
 
-    graph.removeEdge(1, 2);
-    graph.removeEdge(3, 4);
-    
-    const result = graph.getAdjacencyList();
-    const expected = [[1, 3], [0], [3], [0, 2], []];
-    expect(result).toEqual(expected);
+  test('removeEdge', () => {
+    graph.addNode('A');
+    graph.addNode('B');
+    graph.addEdge('A', 'B');
+    graph.removeEdge('A', 'B');
+    expect(graph.hasEdge('A', 'B')).toBe(false);
+  });
+
+  test('hasEdge', () => {
+    graph.addNode('A');
+    graph.addNode('B');
+    graph.addEdge('A', 'B');
+    expect(graph.hasEdge('A', 'B')).toBe(true);
+    expect(graph.hasEdge('B', 'A')).toBe(true);
+    expect(graph.hasEdge('A', 'C')).toBe(false);
   });
 });

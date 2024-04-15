@@ -1,62 +1,29 @@
 export default class UndirectedGraph {
-  private adjacencyList: Map<number, number[]>;
+  private adjacencyList: Map<string, Set<string>>;
 
-  constructor(private numberVertices: number) {
+  constructor() {
     this.adjacencyList = new Map();
-    for (let i = 0; i < this.numberVertices; i++) {
-      this.adjacencyList.set(i, []);
-    }
   }
 
-  addEdge(vertex1: number, vertex2: number): void {
-    this.adjacencyList.get(vertex1)?.push(vertex2);
-    this.adjacencyList.get(vertex2)?.push(vertex1);
+  addNode(vertex: string): void {
+    this.adjacencyList.set(vertex, new Set());
   }
 
-  removeEdge(vertex1: number, vertex2: number): void {
-    const list1 = this.adjacencyList.get(vertex1);
-    const list2 = this.adjacencyList.get(vertex2);
-    if (list1) {
-      const index1 = list1.indexOf(vertex2);
-      if (index1 !== -1) {
-        list1.splice(index1, 1);
-      }
-    }
-    if (list2) {
-      const index2 = list2.indexOf(vertex1);
-      if (index2 !== -1) {
-        list2.splice(index2, 1);
-      }
-    }
+  addEdge(vertex1: string, vertex2: string): void {
+    this.adjacencyList.get(vertex1)?.add(vertex2);
+    this.adjacencyList.get(vertex2)?.add(vertex1);
   }
 
-  hasEdge(vertex1: number, vertex2: number): boolean {
-    const listOfVertex1 = this.adjacencyList.get(vertex1);
-    return !!listOfVertex1?.includes(vertex2);
+  removeEdge(vertex1: string, vertex2: string): void {
+    this.adjacencyList.get(vertex1)?.delete(vertex2);
+    this.adjacencyList.get(vertex2)?.delete(vertex1);
   }
 
-  getAdjacencyList(): number[][] {
-    const result: number[][] = [];
-    for (let i = 0; i < this.numberVertices; i++) {
-      result.push(this.adjacencyList.get(i) as number[]);
-    }
-    return result;
+  hasEdge(vertex1: string, vertex2: string): boolean {
+    return this.adjacencyList.get(vertex1)?.has(vertex2) || false;
   }
 
-  // Display this graph with i = 0 equal to A, i = 1 equal to B, and so on
-  // Example: A -> B -> C -> D -> E
-  displayGraph(): void {
-    for (let i = 0; i < this.numberVertices; i++) {
-      let row = '';
-      const list = this.adjacencyList.get(i) as number[];
-      const letter = String.fromCharCode(65 + i);
-      for (const j of list) {
-        const nextLetter = String.fromCharCode(65 + j);
-        row += letter + ' --> ' + nextLetter + ' ';
-      }
-      if (row !== '') {
-        console.log(row);
-      }
-    }
+  getAdjacencyList(): Map<string, Set<string>> {
+    return this.adjacencyList;
   }
 }
