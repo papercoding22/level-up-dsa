@@ -1,4 +1,4 @@
-import UndirectedGraph from '../undirected-graph-adjacency-matrix';
+import UndirectedGraph from '../UndirectedGraphAdjacencyMatrix';
 
 describe('UndirectedGraph', () => {
   let graph: UndirectedGraph;

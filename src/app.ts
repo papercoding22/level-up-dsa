@@ -1,15 +1,18 @@
 import { select, Separator } from '@inquirer/prompts';
 import chalk from 'chalk';
 
-import { testDrive } from './data-structures/graph/undirected-graph-adjacency-matrix';
 import { isValidSudoku } from './algorithms/valid-sudoku-hash-map';
+import UndirectedGraph from './data-structures/graph/UndirectedGraphAdjacencyMatrix';
 
 const log = console.log;
 
 async function main() {
   log(chalk.blue('Hello') + ' World' + chalk.red('!'));
   const menuChoices = [
-    { name: 'Run testDrive function', value: 'testDrive' },
+    {
+      name: 'Display Undirected Graph Adjacency Matrix',
+      value: 'displayUndirectedGraphAdjacencyMatrix',
+    },
     {
       name: 'Valid Sudoku',
       value: 'validSudoku',
@@ -24,9 +27,14 @@ async function main() {
   });
 
   switch (answer) {
-    case 'testDrive':
-      log(chalk.green('Running testDrive function...'));
-      testDrive();
+    case 'displayUndirectedGraphAdjacencyMatrix':
+      log(chalk.green('Display Undirect Graph Adjacency Matrix...'));
+      const graph = new UndirectedGraph(5);
+      graph.addEdge(0, 1);
+      graph.addEdge(1, 2);
+      graph.addEdge(2, 3);
+      graph.addEdge(3, 4);
+      graph.displayGraph();
       break;
     case 'validSudoku':
       log(chalk.green('Running isValidSudoku function...'));

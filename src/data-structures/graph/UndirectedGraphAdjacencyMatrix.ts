@@ -29,6 +29,9 @@ export default class UndirectedGraph {
   }
 
   // find the vertice that has the most edges
+  // Explain what is degree of a vertex in a graph
+  // The degree of a vertex is the number of edges connected to it
+  // Example: A has 3 edges connected to it, so the degree of A is 3
   findMaxDegree(): number {
     let maxDegree = 0;
     for (let i = 0; i < this.numVertices; i++) {
@@ -43,6 +46,24 @@ export default class UndirectedGraph {
       }
     }
     return maxDegree;
+  }
+
+  findVertexWithMaxDegree(): number {
+    let maxDegree = 0;
+    let vertexWithMaxDegree = 0;
+    for (let i = 0; i < this.numVertices; i++) {
+      let degree = 0;
+      for (let j = 0; j < this.numVertices; j++) {
+        if (this.adjacencyMatrix[i][j] === 1) {
+          degree++;
+        }
+      }
+      if (degree > maxDegree) {
+        maxDegree = degree;
+        vertexWithMaxDegree = i;
+      }
+    }
+    return vertexWithMaxDegree;
   }
 
   // find min degree
@@ -86,15 +107,22 @@ export default class UndirectedGraph {
   getAdjacencyMatrix(): number[][] {
     return this.adjacencyMatrix;
   }
+
+  // Display this graph with i = 0 equal to A, i = 1 equal to B, and so on
+  // Example: A -> B -> C -> D -> E
+  displayGraph(): void {
+    for (let i = 0; i < this.numVertices; i++) {
+      let row = '';
+      for (let j = 0; j < this.numVertices; j++) {
+        if (this.adjacencyMatrix[i][j] === 1) {
+          const letter = String.fromCharCode(65 + i);
+          const nextLetter = String.fromCharCode(65 + j);
+          row += letter + ' -> ' + nextLetter + ' ';
+        }
+      }
+      if (row !== '') {
+        console.log(row);
+      }
+    }
+  }
 }
-
-const testDrive = () => {
-  const graph = new UndirectedGraph(5);
-  graph.addEdge(0, 1);
-  graph.addEdge(1, 2);
-  graph.addEdge(2, 3);
-  graph.addEdge(3, 4);
-  graph.printGraph();
-};
-
-export { testDrive };
