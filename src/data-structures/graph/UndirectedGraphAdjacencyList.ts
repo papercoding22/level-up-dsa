@@ -26,4 +26,10 @@ export default class UndirectedGraph {
   getAdjacencyList(): Map<string, Set<string>> {
     return this.adjacencyList;
   }
+
+  displayGraph(): void {
+    for (const [vertex, edges] of this.adjacencyList) {
+      console.log(`${vertex} -> ${Array.from(edges).join(', ')}`);
+    }
+  }
 }

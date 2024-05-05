@@ -43,12 +43,15 @@ async function main() {
       break;
     case 'displayUndirectedGraphAdjacencyList':
       log(chalk.green('Display Undirect Graph Adjacency List...'));
-      const graphList = new UndirectedGraphList(5);
-      graphList.addEdge(0, 1);
-      graphList.addEdge(0, 3);
-      graphList.addEdge(1, 2);
-      graphList.addEdge(2, 3);
-      graphList.addEdge(3, 4);
+      const graphList = new UndirectedGraphList();
+      graphList.addNode('A');
+      graphList.addNode('B');
+      graphList.addNode('C');
+      graphList.addNode('D');
+      graphList.addEdge('A', 'B');
+      graphList.addEdge('A', 'C');
+      graphList.addEdge('A', 'D');
+      graphList.addEdge('B', 'C');
       graphList.displayGraph();
       break;
     case 'validSudoku':
