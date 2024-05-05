@@ -32,4 +32,24 @@ export default class UndirectedGraph {
       console.log(`${vertex} -> ${Array.from(edges).join(', ')}`);
     }
   }
+
+  dfsHelper(vertex: string, visited: Set<string>): void {
+    visited.add(vertex);
+    console.log(vertex);
+    const neighbors = this.adjacencyList.get(vertex);
+    if (neighbors) {
+      for (const neighbor of Array.from(neighbors)) {
+        // back tracking
+        if (!visited.has(neighbor)) {
+          // deep dive to current vertext's first neighbor
+          this.dfsHelper(neighbor, visited);
+        }
+      }
+    }
+  }
+
+  dfs(startingVertex: string): void {
+    const visited = new Set<string>();
+    this.dfsHelper(startingVertex, visited);
+  }
 }
