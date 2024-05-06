@@ -52,4 +52,28 @@ export default class UndirectedGraph {
     const visited = new Set<string>();
     this.dfsHelper(startingVertex, visited);
   }
+
+  dfs_iterative(startingVertex: string): void {
+    const visited = new Set<string>();
+    const stack = [];
+    stack.push(startingVertex);
+    while (stack.length > 0) {
+      const currentVertex = stack.pop() as string;
+
+      if (!visited.has(currentVertex)) {
+        visited.add(currentVertex);
+        console.log(currentVertex);
+      }
+
+      // Visit all neighbors of current vertex
+      const neighbors = this.adjacencyList.get(currentVertex);
+      if (neighbors) {
+        for (const neighbor of Array.from(neighbors)) {
+          if (!visited.has(neighbor)) {
+            stack.push(neighbor);
+          }
+        }
+      }
+    }
+  }
 }

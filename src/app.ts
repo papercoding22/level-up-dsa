@@ -52,8 +52,10 @@ async function main() {
       graphList.addEdge('A', 'C');
       graphList.addEdge('A', 'D');
       graphList.addEdge('B', 'C');
-      log(chalk.yellow('Adjacency List - DFS: Start from A'));
+      log(chalk.yellow('Adjacency List - DFS Recursive: Start from A'));
       graphList.dfs('A');
+      log(chalk.yellow('Adjacency List - DFS Stack: Start from A'));
+      graphList.dfs_iterative('A');
       break;
     case 'validSudoku':
       log(chalk.green('Running isValidSudoku function...'));
