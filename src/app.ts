@@ -56,6 +56,8 @@ async function main() {
       graphList.dfs('A');
       log(chalk.yellow('Adjacency List - DFS Stack: Start from A'));
       graphList.dfs_iterative('A');
+      log(chalk.yellow('Adjacency List - BFS Queue: Start from A'));
+      graphList.bfs_iterative('A');
       break;
     case 'validSudoku':
       log(chalk.green('Running isValidSudoku function...'));

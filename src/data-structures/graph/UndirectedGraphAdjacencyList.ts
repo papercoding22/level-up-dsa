@@ -33,6 +33,14 @@ export default class UndirectedGraph {
     }
   }
 
+  visit(vertex: string): void {
+    console.log(vertex);
+  }
+
+  neighbors(vertex: string): Set<string> {
+    return this.adjacencyList.get(vertex) || new Set();
+  }
+
   dfsHelper(vertex: string, visited: Set<string>): void {
     visited.add(vertex);
     console.log(vertex);
@@ -53,22 +61,36 @@ export default class UndirectedGraph {
     this.dfsHelper(startingVertex, visited);
   }
 
+  bfs_iterative(startingVertex: string): void {
+    const visited = new Set<string>();
+    const queue = [];
+    queue.push(startingVertex);
+    while (queue.length > 0) {
+      const currentVertex = queue.shift() as string;
+      if (!visited.has(currentVertex)) {
+        this.visit(currentVertex);
+        visited.add(currentVertex);
+        const neighbors = this.neighbors(currentVertex);
+        for (const neighbor of Array.from(neighbors)) {
+          if (!visited.has(neighbor)) {
+            queue.push(neighbor);
+          }
+        }
+      }
+    }
+  }
+
   dfs_iterative(startingVertex: string): void {
     const visited = new Set<string>();
     const stack = [];
     stack.push(startingVertex);
     while (stack.length > 0) {
       const currentVertex = stack.pop() as string;
-
       if (!visited.has(currentVertex)) {
         visited.add(currentVertex);
-        console.log(currentVertex);
-      }
-
-      // Visit all neighbors of current vertex
-      const neighbors = this.adjacencyList.get(currentVertex);
-      if (neighbors) {
-        for (const neighbor of Array.from(neighbors)) {
+        this.visit(currentVertex);
+        const neighbors = this.neighbors(currentVertex);
+        for (const neighbor of neighbors) {
           if (!visited.has(neighbor)) {
             stack.push(neighbor);
           }
