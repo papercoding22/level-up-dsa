@@ -43,7 +43,6 @@ export default class UndirectedGraph {
 
   dfsHelper(vertex: string, visited: Set<string>): void {
     visited.add(vertex);
-    console.log(vertex);
     const neighbors = this.adjacencyList.get(vertex);
     if (neighbors) {
       for (const neighbor of Array.from(neighbors)) {

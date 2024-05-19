@@ -4,6 +4,7 @@ import chalk from 'chalk';
 import { isValidSudoku } from './algorithms/valid-sudoku-hash-map';
 import UndirectedGraphMatrix from './data-structures/graph/UndirectedGraphAdjacencyMatrix';
 import UndirectedGraphList from './data-structures/graph/UndirectedGraphAdjacencyList';
+import WeightedGraph from './data-structures/graph/WeightedGraph';
 
 const log = console.log;
 
@@ -11,12 +12,16 @@ async function main() {
   log(chalk.blue('Hello') + ' World' + chalk.red('!'));
   const menuChoices = [
     {
-      name: 'Display Undirected Graph Adjacency Matrix',
+      name: 'Display Graph implemented with Adjacency Matrix',
       value: 'displayUndirectedGraphAdjacencyMatrix',
     },
     {
-      name: 'Display Undirected Graph Adjacency List',
+      name: 'Display Graph implemented with Adjacency List',
       value: 'displayUndirectedGraphAdjacencyList',
+    },
+    {
+      name: 'Display Shortest Path in Graph',
+      value: 'displayShortestPath',
     },
     {
       name: 'Valid Sudoku',
@@ -58,6 +63,30 @@ async function main() {
       graphList.dfs_iterative('A');
       log(chalk.yellow('Adjacency List - BFS Queue: Start from A'));
       graphList.bfs_iterative('A');
+      break;
+    case 'displayShortestPath':
+      log(chalk.green('Display Shortest Path in Graph...'));
+      const graph = new WeightedGraph();
+      graph.addNode('A');
+      graph.addNode('B');
+      graph.addNode('C');
+      graph.addNode('D');
+      graph.addNode('E');
+      graph.addEdge('A', 'B', 1)
+      graph.addEdge('A', 'C', 2)
+      graph.addEdge('B', 'D', 4)
+      graph.addEdge('B', 'E', 1)
+      graph.addEdge('C', 'D', 4)
+      graph.addEdge('D', 'E', 2)
+      const shortestDirections = graph.shortestDirection('A', 'D');
+      log(chalk.yellow('Shortest Directions from A to D:'));
+      log(shortestDirections);
+      const shortestPath = graph.shortestPathTo('A', 'D');
+      log(chalk.yellow('Shortest Path from A to D:'));
+      log(shortestPath);
+      const shortestDistances = graph.shortestPath('A');
+      log(chalk.yellow('Shortest Distances from A:'));
+      log(shortestDistances);
       break;
     case 'validSudoku':
       log(chalk.green('Running isValidSudoku function...'));

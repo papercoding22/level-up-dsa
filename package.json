@@ -7,6 +7,7 @@
     "build": "npx tsc",
     "start": "node dist/src/app.js",
     "dev": "tsx src/app.ts --watch",
+    "dev:debug": "tsx src/app.ts --watch --inspect",
     "test": "jest",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix"
