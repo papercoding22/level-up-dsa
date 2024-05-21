@@ -76,7 +76,7 @@ async function main() {
       graph.addEdge('A', 'C', 2)
       graph.addEdge('B', 'D', 4)
       graph.addEdge('B', 'E', 1)
-      graph.addEdge('C', 'D', 4)
+      graph.addEdge('C', 'D', 1)
       graph.addEdge('D', 'E', 2)
       const shortestDirections = graph.shortestDirection('A', 'D');
       log(chalk.yellow('Shortest Directions from A to D:'));

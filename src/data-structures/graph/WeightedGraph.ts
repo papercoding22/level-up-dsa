@@ -74,7 +74,7 @@ export default class WeightedGraph {
     distances.set(source, { distance: 0, nearestVertex: '' });
     priorityQueue.enqueue(source, 0);
 
-    while (!priorityQueue.isEmpty()) {
+    while (!visited.has(destination)) {
       const currentVertex = priorityQueue.dequeue();
 
       if (!currentVertex || visited.has(currentVertex)) {
