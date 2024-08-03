@@ -30,4 +30,22 @@ class BinarySearchTree<T extends number | string> {
       }
     }
   }
+
+	print() {
+		if (this.root === null) {
+			return;
+		}
+
+		const traverse = (node: TreeNode<T> | null) => {
+			if (node === null) {
+				return;
+			}
+
+			traverse(node.getLeft());
+			console.log(node.getValue());
+			traverse(node.getRight());
+		};
+
+		traverse(this.root);
+	}
 }
