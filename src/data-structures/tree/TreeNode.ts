@@ -1,4 +1,4 @@
-class TreeNode<T> {
+export default class TreeNode<T> {
 	private value: T;
 	private left: TreeNode<T> | null;
 	private right: TreeNode<T> | null;
