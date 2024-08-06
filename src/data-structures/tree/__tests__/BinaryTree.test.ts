@@ -1,12 +1,12 @@
-import BinaryTree from "../BinaryTree";
+import BinaryTree from '../BinaryTree';
 
-describe("BinaryTree", () => {
-  test("should create binary tree", () => {
+describe('BinaryTree', () => {
+  test('should create binary tree', () => {
     const binaryTree = new BinaryTree<number>();
     expect(binaryTree.root).toBeNull();
   });
 
-  test("should insert values to binary tree", () => {
+  test('should insert values to binary tree', () => {
     const binaryTree = new BinaryTree<number>();
     binaryTree.insert(10);
     binaryTree.insert(5);
@@ -25,7 +25,7 @@ describe("BinaryTree", () => {
     expect(rightNode?.getRight()?.getValue()).toBe(17);
   });
 
-  test("should print binary tree", () => {
+  test('should print binary tree', () => {
     const binaryTree = new BinaryTree<number>();
     binaryTree.insert(10);
     binaryTree.insert(5);
@@ -33,17 +33,8 @@ describe("BinaryTree", () => {
     binaryTree.insert(17);
     binaryTree.insert(3);
 
-    const consoleSpy = jest.spyOn(console, "log").mockImplementation();
-
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
     binaryTree.print();
-
-    expect(consoleSpy).toHaveBeenCalledTimes(5);
-    expect(consoleSpy).toHaveBeenNthCalledWith(1, 3);
-    expect(consoleSpy).toHaveBeenNthCalledWith(2, 5);
-    expect(consoleSpy).toHaveBeenNthCalledWith(3, 10);
-    expect(consoleSpy).toHaveBeenNthCalledWith(4, 15);
-    expect(consoleSpy).toHaveBeenNthCalledWith(5, 17);
-
-    consoleSpy.mockRestore();
+    expect(consoleSpy).toHaveBeenCalledWith('3 5 17 15 10');
   });
 });

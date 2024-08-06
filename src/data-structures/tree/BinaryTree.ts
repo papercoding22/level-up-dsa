@@ -33,21 +33,25 @@ export default class BinaryTree<T extends number | string> {
     }
   }
 
-  print() {
-    if (this.root === null) {
+  traverse(node: TreeNode<T> | null, result: T[]): void {
+    if (node === null) {
       return;
     }
 
-    const traverse = (node: TreeNode<T> | null) => {
-      if (node === null) {
-        return;
-      }
+    if (node.getLeft() === null && node.getRight() === null) {
+      result.push(node.getValue());
+      return;
+    }
 
-      traverse(node.getLeft());
-      console.log(node.getValue());
-      traverse(node.getRight());
-    };
+    // back from left
+    this.traverse(node.getLeft(), result);
+    this.traverse(node.getRight(), result);
+    result.push(node.getValue());
+  }
 
-    traverse(this.root);
+  print() {
+    const result: T[] = [];
+    this.traverse(this.root, result);
+    console.log(result.join(' '));
   }
 }
