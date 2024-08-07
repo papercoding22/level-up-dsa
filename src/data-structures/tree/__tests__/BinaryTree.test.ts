@@ -25,6 +25,19 @@ describe('BinaryTree', () => {
     expect(rightNode?.getRight()?.getValue()).toBe(17);
   });
 
+  test('traverse binary tree using depth-first search', () => {
+    const binaryTree = new BinaryTree<number>();
+    binaryTree.insert(10);
+    binaryTree.insert(5);
+    binaryTree.insert(15);
+    binaryTree.insert(17);
+    binaryTree.insert(3);
+
+    const result: number[] = [];
+    binaryTree.traverse_dfs(binaryTree.root, result);
+    expect(result).toEqual([3, 5, 17, 15, 10]);
+  });
+
   test('should print binary tree', () => {
     const binaryTree = new BinaryTree<number>();
     binaryTree.insert(10);

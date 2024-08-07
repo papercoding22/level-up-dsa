@@ -1,4 +1,4 @@
-class BinaryTree {
+export class BinaryTree {
   value: number;
   left: BinaryTree | null;
   right: BinaryTree | null;
@@ -10,7 +10,7 @@ class BinaryTree {
   }
 }
 
-export function branchSums(root: BinaryTree): number[] {
+export function branchSums(root: BinaryTree | null): number[] {
   // Write your code here
   const result: number[] = [];
   const traverseAndSum = (node: BinaryTree | null, sum: number) => {

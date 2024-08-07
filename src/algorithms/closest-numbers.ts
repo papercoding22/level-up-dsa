@@ -1,3 +1,10 @@
+/**
+ * Finds the closest numbers in an array.
+ * @description Given an array, find pair or pairs of elements have the smallest absolute difference between them.
+ * @example closesNumbers([10, 30, 20, 40]) => [10, 20, 20, 30, 30, 40]
+ * @param arr - The input array of numbers.
+ * @returns An array containing the closest numbers.
+ */
 export function closestNumbers(arr: number[]): number[] {
   // Write your code here
   const sortedArr = arr.sort((a, b) => a - b);

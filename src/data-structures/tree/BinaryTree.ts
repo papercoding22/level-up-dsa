@@ -33,7 +33,7 @@ export default class BinaryTree<T extends number | string> {
     }
   }
 
-  traverse(node: TreeNode<T> | null, result: T[]): void {
+  traverse_dfs(node: TreeNode<T> | null, result: T[]): void {
     if (node === null) {
       return;
     }
@@ -44,14 +44,36 @@ export default class BinaryTree<T extends number | string> {
     }
 
     // back from left
-    this.traverse(node.getLeft(), result);
-    this.traverse(node.getRight(), result);
+    this.traverse_dfs(node.getLeft(), result);
+    this.traverse_dfs(node.getRight(), result);
     result.push(node.getValue());
+  }
+
+  traverse_bfs(node: TreeNode<T> | null, result: T[]): void {
+    if (node === null) {
+      return;
+    }
+
+    const queue: TreeNode<T>[] = [];
+    queue.push(node);
+
+    while (queue.length > 0) {
+      const current = queue.shift() as TreeNode<T>;
+      result.push(current.getValue());
+
+      if (current.getLeft() !== null) {
+        queue.push(current.getLeft() as TreeNode<T>);
+      }
+
+      if (current.getRight() !== null) {
+        queue.push(current.getRight() as TreeNode<T>);
+      }
+    }
   }
 
   print() {
     const result: T[] = [];
-    this.traverse(this.root, result);
+    this.traverse_dfs(this.root, result);
     console.log(result.join(' '));
   }
 }
