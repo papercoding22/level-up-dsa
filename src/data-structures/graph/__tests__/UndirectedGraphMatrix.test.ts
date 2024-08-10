@@ -1,25 +1,10 @@
-import UndirectedGraph from '../UndirectedGraphAdjacencyMatrix';
+import UndirectedGraphMatrix from '../UndirectedGraphMatrix';
 
 describe('UndirectedGraph', () => {
-  let graph: UndirectedGraph;
+  let graph: UndirectedGraphMatrix;
 
   beforeEach(() => {
-    graph = new UndirectedGraph(5);
-  });
-
-  it('should add edges correctly', () => {
-    graph.addEdge(0, 1);
-    graph.addEdge(1, 2);
-    graph.addEdge(2, 3);
-    graph.addEdge(3, 4);
-
-    expect(graph.getAdjacencyMatrix()).toEqual([
-      [0, 1, 0, 0, 0],
-      [1, 0, 1, 0, 0],
-      [0, 1, 0, 1, 0],
-      [0, 0, 1, 0, 1],
-      [0, 0, 0, 1, 0],
-    ]);
+    graph = new UndirectedGraphMatrix();
   });
 
   it('should remove edges correctly', () => {

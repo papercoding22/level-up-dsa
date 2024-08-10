@@ -1,10 +1,10 @@
-import UndirectedGraph from '../UndirectedGraphAdjacencyList';
+import UndirectedGraphList from '../UndirectedGraphList';
 
 describe('UndirectedGraph', () => {
-  let graph: UndirectedGraph;
+  let graph: UndirectedGraphList;
 
   beforeEach(() => {
-    graph = new UndirectedGraph();
+    graph = new UndirectedGraphList();
   });
 
   test('addNode', () => {

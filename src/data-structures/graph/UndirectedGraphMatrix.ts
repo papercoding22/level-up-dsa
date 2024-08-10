@@ -1,31 +1,57 @@
-export default class UndirectedGraph {
+export default class UndirectedGraphMatrix {
   private adjacencyMatrix: number[][];
 
-  constructor(private numVertices: number) {
+  static CONNECTED = 1;
+  static NOT_CONNECTED = 0;
+
+  constructor() {
     this.adjacencyMatrix = [];
+  }
+
+  get numVertices(): number {
+    return this.adjacencyMatrix.length;
+  }
+
+  getAdjacencyMatrix(): number[][] {
+    return this.adjacencyMatrix;
+  }
+
+  normalizeGraph(): void {
     for (let i = 0; i < this.numVertices; i++) {
-      this.adjacencyMatrix[i] = [];
       for (let j = 0; j < this.numVertices; j++) {
-        this.adjacencyMatrix[i][j] = 0; // Initialize with 0 (no edges)
+        if (this.adjacencyMatrix[i][j] === undefined) {
+          this.adjacencyMatrix[i][j] = UndirectedGraphMatrix.NOT_CONNECTED;
+        }
       }
     }
   }
 
   addEdge(vertex1: number, vertex2: number): void {
-    // Adding edge between vertex1 and vertex2 (undirected graph)
-    this.adjacencyMatrix[vertex1][vertex2] = 1;
-    this.adjacencyMatrix[vertex2][vertex1] = 1; // Since it's undirected, add edge in both directions
+    // if the vertex is not in the adjacency matrix, add it
+    if (this.adjacencyMatrix[vertex1] === undefined) {
+      this.adjacencyMatrix[vertex1] = [];
+    }
+    if (this.adjacencyMatrix[vertex2] === undefined) {
+      this.adjacencyMatrix[vertex2] = [];
+    }
+
+    this.adjacencyMatrix[vertex1][vertex2] = UndirectedGraphMatrix.CONNECTED;
+    this.adjacencyMatrix[vertex2][vertex1] = UndirectedGraphMatrix.CONNECTED;
+    this.normalizeGraph();
   }
 
   removeEdge(vertex1: number, vertex2: number): void {
-    // Removing edge between vertex1 and vertex2
-    this.adjacencyMatrix[vertex1][vertex2] = 0;
-    this.adjacencyMatrix[vertex2][vertex1] = 0;
+    // Check if the vertices exist in the adjacency matrix
+    if (this.adjacencyMatrix[vertex1] === undefined || this.adjacencyMatrix[vertex2] === undefined) {
+      return;
+    }
+    this.adjacencyMatrix[vertex1][vertex2] = UndirectedGraphMatrix.NOT_CONNECTED;
+    this.adjacencyMatrix[vertex2][vertex1] = UndirectedGraphMatrix.NOT_CONNECTED;
   }
 
   // find the edge between two vertices
   hasEdge(vertex1: number, vertex2: number): boolean {
-    return this.adjacencyMatrix[vertex1][vertex2] === 1;
+    return this.adjacencyMatrix[vertex1][vertex2] === UndirectedGraphMatrix.CONNECTED;
   }
 
   // find the vertice that has the most edges
@@ -66,7 +92,7 @@ export default class UndirectedGraph {
     return vertexWithMaxDegree;
   }
 
-  // find min degree
+  // find min degree, min degree is the vertex with the least edges
   findMinDegree(): number {
     let minDegree = this.numVertices;
     for (let i = 0; i < this.numVertices; i++) {
@@ -83,17 +109,6 @@ export default class UndirectedGraph {
     return minDegree;
   }
 
-  printGraph(): void {
-    for (let i = 0; i < this.numVertices; i++) {
-      let row = '';
-      for (let j = 0; j < this.numVertices; j++) {
-        row += this.adjacencyMatrix[i][j] + ' ';
-      }
-      console.log(row);
-    }
-  }
-
-  // create a function to draw the graph in the console
   drawGraph(): void {
     for (let i = 0; i < this.numVertices; i++) {
       let row = '';
@@ -101,28 +116,6 @@ export default class UndirectedGraph {
         row += this.adjacencyMatrix[i][j] + ' ';
       }
       console.log(row);
-    }
-  }
-
-  getAdjacencyMatrix(): number[][] {
-    return this.adjacencyMatrix;
-  }
-
-  // Display this graph with i = 0 equal to A, i = 1 equal to B, and so on
-  // Example: A -> B -> C -> D -> E
-  displayGraph(): void {
-    for (let i = 0; i < this.numVertices; i++) {
-      let row = '';
-      for (let j = 0; j < this.numVertices; j++) {
-        if (this.adjacencyMatrix[i][j] === 1) {
-          const letter = String.fromCharCode(65 + i);
-          const nextLetter = String.fromCharCode(65 + j);
-          row += letter + ' -> ' + nextLetter + ' ';
-        }
-      }
-      if (row !== '') {
-        console.log(row);
-      }
     }
   }
 }

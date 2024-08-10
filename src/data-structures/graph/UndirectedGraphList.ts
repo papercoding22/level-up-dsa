@@ -1,4 +1,4 @@
-export default class UndirectedGraph {
+export default class UndirectedGraphList {
   private adjacencyList: Map<string, Set<string>>;
 
   constructor() {
